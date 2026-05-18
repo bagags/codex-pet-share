@@ -91,10 +91,10 @@ Worker adapter, update the `users.is_admin` field in D1.
 
 ## 7. Seed A Pet
 
-Use the signed-in app upload flow with a folder that contains `pet.json`,
-`spritesheet.webp`, `share.png`, and `preview.webp`. For another backend, seed
-through that provider's adapter while keeping the same public pet response
-shape.
+Use the signed-in app upload flow with a folder that contains `pet.json` and
+`spritesheet.webp`. The app generates its share, preview, and poster assets
+during upload. For another backend, seed through that provider's adapter while
+keeping the same public pet response shape.
 
 ## 8. Smoke Checklist
 

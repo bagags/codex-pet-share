@@ -481,13 +481,18 @@ async function encodeCanvasAsWebp(
   fileName: string,
   quality: number
 ) {
-  const blob = await new Promise<Blob | null>((resolve) => {
-    canvas.toBlob(resolve, "image/webp", quality / 100);
-  });
-  if (!blob) {
+  const context = canvas.getContext("2d");
+  if (!context) {
     throw new Error(`Could not create ${fileName}.`);
   }
-  return new File([blob], fileName, { type: "image/webp" });
+  const encode = await loadWebpEncoder();
+  const buffer = await encode(context.getImageData(0, 0, canvas.width, canvas.height), {
+    quality,
+    lossless: 0,
+    exact: 1,
+    alpha_quality: 100
+  });
+  return new File([buffer], fileName, { type: "image/webp" });
 }
 
 function wrapCanvasText(
